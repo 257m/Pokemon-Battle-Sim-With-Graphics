@@ -6,4 +6,4 @@ const char Statusnames [8][12] = {"None","Burned","Poisoned","Intoxicated","Para
 
 const char EOPTEXT[][14] = {"","The opposing ","","the opposing ","your","enemy","Player","Enemy"};
 
-const char TypeNames[][14] = {"NULL","NORMAL","FIRE","WATER","ELECTRIC","GRASS","ICE","FIGHTING","POISON","GROUND","FLYING","PSYCHIC","BUG","ROCK","GHOST","DRAGON","DARK","STEEL","FAIRY","SOUND","LIGHT","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL"};
+const char TypeNames[][14] = {"NULL","NORMAL","FIRE","WATER","ELECTRIC","PLANT","MAGIC","AIR","GROUND","POISON","LIGHT","DARK","BUG","GHOST","ICE","METAL","ROCK","MARTIAL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL","NULL"};

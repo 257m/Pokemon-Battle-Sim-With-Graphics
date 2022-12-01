@@ -1,6 +1,7 @@
 { pkgs }: {
 	deps = [
-		pkgs.cloc
+		pkgs.indent
+  pkgs.cloc
   pkgs.htop
   pkgs.vim
   pkgs.zip

@@ -38,8 +38,8 @@ void ResetBoosts(struct MyPokemon* pokemon) {
 
 char StatusImmunity(unsigned char status,bool eop) {
   if (status == STATUS_BURN && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == FIRE || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == FIRE)) return 0;
-  else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == POISON || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == POISON || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == STEEL || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == STEEL)) return 0;
-  else if (CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_POWDER_MOVE) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == GRASS || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == GRASS)) return 0;
+  else if ((status == STATUS_TOXIC || status == STATUS_POISON) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == POISON || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == POISON || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == METAL || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == METAL)) return 0;
+  else if (CHK_BIT(MoveList[Parties[eop].Turn->Move].FLAGS,nFLAG_POWDER_MOVE) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == PLANT || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == PLANT)) return 0;
   else if  ((status == STATUS_PARALYSIS) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == ELECTRIC || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == ELECTRIC || (Parties[eop].Turn->Move == Thunder_Wave && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == GROUND || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == GROUND)))) return 0;
   else if ((status == STATUS_FREEZE) && (POKEMONDEX[Parties[!eop].Member[0]->Poke].Type1 == ICE || POKEMONDEX[Parties[!eop].Member[0]->Poke].Type2 == ICE)) return 0;
   return 1;
@@ -153,7 +153,7 @@ void RoarFunc(char et,bool eop, bool pos) {
     }
     ResetBoosts(Parties[!eop].Member[0]);
     CLEAR_EFFECTS(!eop);
-		CLEAR_EFFECT_COUNTERS(!eop);
+	CLEAR_EFFECT_COUNTERS(!eop);
     Switch(!eop,randswitch);
     sprintf(TempTextBuffer,"%s was dragged out!\n",str_decompress_and_format_free(POKEMONDEX[Parties[!eop].Member[0]->Poke].Name));
 		TextBoxUpdateFast(TempTextBuffer,50,1000);

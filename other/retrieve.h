@@ -42,7 +42,7 @@ void RetrieveUserMove(bool eop) {
 	bool Menu = ACTION_SELECTION;
 	bool Retrieving = 1;
 	bool Done = 0;
-	SDL_FlushEvent(SDL_KEYDOWN);
+	SDL_FlushEvents(SDL_USEREVENT, SDL_LASTEVENT);
 	while(!Done) {
 	while(Retrieving) {
 		bool UpAndDown = (SDL_GetTicks()/250) % 2;

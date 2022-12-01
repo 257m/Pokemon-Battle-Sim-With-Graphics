@@ -208,7 +208,7 @@ struct MyPokemon Pokemon6 = {
 };
 
 struct MyPokemon EnemyPokemon1 = {
-.Poke = PIDGEY,
+.Poke = SLOR,
 .Level = 100,
 .CurrentHp = 20,
 .Item = Focus_Sash,
@@ -230,7 +230,7 @@ struct MyPokemon EnemyPokemon1 = {
 };
 
 struct MyPokemon EnemyPokemon2 = {
-.Poke = PIDGEOTTO,
+.Poke = BULEJ,
 .Level = 100,
 .CurrentHp = 20,
 .Item = Focus_Sash,
@@ -252,7 +252,7 @@ struct MyPokemon EnemyPokemon2 = {
 };
 
 struct MyPokemon EnemyPokemon3 = {
-.Poke = PIDGEOT,
+.Poke = BULICJEL,
 .Level = 100,
 .CurrentHp = 20,
 .Item = Focus_Sash,

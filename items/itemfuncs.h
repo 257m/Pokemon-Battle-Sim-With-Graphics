@@ -5,13 +5,13 @@ void Leftoversf(char et,bool eop) {
     int Recovery;
     if (et == 5) {
     if (Parties[eop].Member[0]->ItemUsable) {
-      if (Parties[eop].Member[0]->CurrentHp < Parties[eop].Member[0]->Hp) {
-        Recovery = Parties[eop].Member[0]->Hp/16;
-        if (Recovery + Parties[eop].Member[0]->CurrentHp > Parties[eop].Member[0]->Hp) Recovery = Parties[eop].Member[0]->Hp - Parties[eop].Member[0]->CurrentHp;
-        Parties[eop].Member[0]->CurrentHp += Recovery;
-        printf("%s restored a little HP using its Leftovers\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
-        printf("%s is at %d/%d hp\n\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name),Parties[eop].Member[0]->CurrentHp,Parties[eop].Member[0]->Hp);
-          }
+    	if (Parties[eop].Member[0]->CurrentHp < Parties[eop].Member[0]->Hp) {
+        	Recovery = Parties[eop].Member[0]->Hp/16;
+        	if (Recovery + Parties[eop].Member[0]->CurrentHp > Parties[eop].Member[0]->Hp) Recovery = Parties[eop].Member[0]->Hp - Parties[eop].Member[0]->CurrentHp;
+        	Parties[eop].Member[0]->CurrentHp += Recovery;
+        	sprintf(TempTextBuffer,"%s restored a little HP using its Leftovers\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
+			TextBoxUpdateFast(TempTextBuffer,50,1000);
+        }
       }
       }
 }
@@ -21,8 +21,9 @@ void Focus_Sashf(char et,bool eop) {
     if (Parties[eop].Member[0]->ItemUsable) {
     if (Parties[eop].Member[0]->CurrentHp == Parties[eop].Member[0]->Hp && Parties[!eop].Damage >= Parties[eop].Member[0]->Hp && !(CHK_BIT(Parties[eop].EFFECT_FLAGS[0],EFFECT_PROTECT) && CHK_BIT(MoveList[Parties[!eop].Turn->Move].FLAGS,nFLAG_PROTECT_AFFECTED))) {
       Parties[!eop].Damage = Parties[eop].Member[0]->CurrentHp-1;
-      printf("%s hung on with its Focus Sash!\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
-      Parties[eop].Member[0]->ItemUsable = 0;
+      	sprintf(TempTextBuffer,"%s hung on with its Focus Sash!\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[0]->Poke].Name));
+		TextBoxUpdateFast(TempTextBuffer,50,1000);
+		Parties[eop].Member[0]->ItemUsable = 0;
       }
     }
       }
