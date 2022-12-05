@@ -55,4 +55,6 @@ const struct PokemonDex POKEMONDEX [] = {
 {"Magihglorain",75,40,40,175,175,125,LIGHT,MAGIC},
 {"Tibertial",50,75,60,75,60,65,MAGIC,MARTIAL},
 {"Tiberatieal",75,100,80,100,80,90,MAGIC,MARTIAL},
+{"Hieloun",60,75,50,45,60,75,FIRE,DARK},
+{"Hieloundour",75,100,60,65,75,100,FIRE,DARK},
 };

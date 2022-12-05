@@ -265,6 +265,7 @@ AF_TYPEIMMUNITY,
 enum {
 EFFECT_PROTECT,
 EFFECT_CONFUSION,
+EFFECT_MAX,
 };
 
 // Effect execution times
