@@ -34,7 +34,7 @@ x | Put Natures into to an array and have the MyPokemon struct store natures as 
 
 x | implement Big_Pecks // it might be hard? No really it needs to be quite versatile you might have to add a function for when a ability deactivates // not so hard actually after a bit of thinking i just added a ability call on switch although i will have to add more for cases like when it is suppressed or the Ability suddenly changes via moves like simple beam but that is for another time
 
-// this isn't a task just a note // after spending 2 mmonths on this project i decided to actually look at the source code for the pokemon games and it turns my whole just making everything a function isn't exactly optimal and i think i might just rewrite the whole project. You know what f that, so what the current way im doing things is not optimal who cares pointers and funcs takes lots of memory but in looking at just how much memory you actually have on modern devices i doubt im even gonna reach above 10% ram usage // each pointer is a byte so if we have say a 1000 moves 1000 items and 1000 abilities thats only 24 kb and you could say what about the funcs themselves but even if the func are taking 100 times the ram that moves items and abilities are taking that's only 2400 kb and i have like a gig of ram so i don't think thats a problem alhough most of the project is going to be RO by the end product
+// this isn't a task just a note // after spending 2 mmonths on this project i decided to actually look at the source code for the pokemon games and it turns my whole just making everything a function isn't exactly optimal and i think i might just rewrite the whole project. You know what f that, so what the current way im doing things is not optimal who cares pointers and funcs takes lots of memory but in looking at just how much memory you actually have on modern devices i doubt im even gonna reach above 10% ram usage // each pointer is 8 bytes so if we have say a 1000 moves 1000 items and 1000 abilities thats only 24 kb and you could say what about the funcs themselves but even if the func are taking 100 times the ram that moves items and abilities are taking that's only 2400 kb and i have like a gig of ram so i don't think thats a problem although most of the project is going to be RO by the end product
 
 // another note // i think i might need rethink how move,item and ability funcs are handling input(ima shorten moves,items,ability to mib) because rather than having to write the same code twice i just create a array that stores pointers to Player and EnemyParty
 
@@ -68,12 +68,20 @@ x | make moves have two movefuncs and double the GNRL_PURPOSE
 
 x | Generalize items
 
-x | Text compression // this is harder than I thought // that took four hours of back breaking work but i got it done
+x | Text compression // this is harder than I thought // that took four hours of back breaking work but i got it done // Dec 1, 2022 lol I decided to scrap Text compression because it just makes adding moves and pokemon a pain
 
 x | compress pokemon aswell
 
 x | I haven't added to this in awhile but i need to get the partyviewer done
 
-o | i need to get scrolling text working // mostly done
+x | i need to get scrolling text working // mostly done
 
-o | i need to rewrite some of the my old code that use tt with the ternary operator ?:
+x | i need to rewrite some of the my old code that use tt with the ternary operator ?:
+
+// it's Dec 1, I am back working on the project from my very long break. Here are the things to do
+
+x | Make status infliction move support any arbitrary effect
+
+o | Make a macro system for execution times for clarity of code and organization
+
+o | Make effect functions actually do something

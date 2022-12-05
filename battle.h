@@ -29,9 +29,7 @@ int Battle() {
 						printf("\033[2K");
 						for (int g = 0;
 							 g < MOVE_MAX; g++)
-							if (strcmp(TextBuffer,
-									   str_decompress_and_format_free(
-										   MoveList[g].Name)) == 0) {
+							if (strcmp(TextBuffer,MoveList[g].Name) == 0) {
 								Parties[j].Member[i]->Moves[h].Move = g;
 								break;
 							}
@@ -108,11 +106,8 @@ int Battle() {
 		Retrieve = 1;
 	}
 
-	printf("Go %s!\n", str_decompress_and_format_free(
-						   POKEMONDEX[Parties[0].Member[0]->Poke].Name));
-	printf("The Enemy sent out %s!\n\n",
-		   str_decompress_and_format_free(
-			   POKEMONDEX[Parties[1].Member[0]->Poke].Name));
+	printf("Go %s!\n",POKEMONDEX[Parties[0].Member[0]->Poke].Name);
+	printf("The Enemy sent out %s!\n\n",POKEMONDEX[Parties[1].Member[0]->Poke].Name);
 	Parties[0].Turn = &Empty_slot;
 	Parties[1].Turn = &Empty_slot;
 	while (BattleMode) {
@@ -232,8 +227,6 @@ int Battle() {
 		MOVE_FUNC_LIST[MoveList[Parties[1].Turn->Move].movefunc >> 5](0, 1, 0);
 		MOVE_FUNC_LIST[MoveList[Parties[1].Turn->Move].movefunc &
 					   REMOVE_FIRST_FIVE_BITS](0, 1, 1);
-		ACTIVATE_EFFECTS(0, 0);
-		ACTIVATE_EFFECTS(0, 1);
 
 		ExecuteMove(!First);
 		ExecuteMove(First);

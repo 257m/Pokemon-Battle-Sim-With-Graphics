@@ -8,7 +8,7 @@ typedef void (*ugpf)(unsigned char,bool);
 typedef void (*mf)(char,bool,bool);
 
 struct PokemonDex {
-char Name[8]; // Stores the name of pokemon later this going to be compressed
+char Name [12]; // Stores the name of pokemon later
 unsigned char Hp;
 unsigned char Atk;
 unsigned char Def;
@@ -67,7 +67,7 @@ float TypeChart [][18] = {
 //  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
 
 struct Move {
- char Name[10]; // Stores the names of the pokemon it is compressed to save space currently it is at 5 bit per character
+ char Name[16] ; // Stores the names of the pokemon
  unsigned char BP; // The Basepower of the move its a value from 0-255. Note that some move may have a BP over 255 in some cases but that will be handled by a PP multiplier
  unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considered by the game to be a move that never misses.
  unsigned int PP : 3; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value

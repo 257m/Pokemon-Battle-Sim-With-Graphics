@@ -42,7 +42,7 @@ void UpdateBattle() {
 				drawText(free_pointers[0],225,125,255,255,255,SMALL_FONT);
 				free(free_pointers[0]);
 
-				drawText((free_pointers[0] = str_decompress_and_format(POKEMONDEX[Parties[0].Member[0]->Poke].Name)),154,103,255,255,255,REGULAR_FONT);
+				drawText(POKEMONDEX[Parties[0].Member[0]->Poke].Name,154,103,255,255,255,REGULAR_FONT);
 				free(free_pointers[0]);
 
 				sprintf((free_pointers[0] = malloc(4)),"%d",Parties[0].Member[0]->Level);
@@ -76,7 +76,7 @@ void UpdateBattle() {
 				drawText(free_pointers[0],73,49,255,255,255,SMALL_FONT);
 				free(free_pointers[0]);
 
-				drawText((free_pointers[0] = str_decompress_and_format(POKEMONDEX[Parties[1].Member[0]->Poke].Name)),2,27,255,255,255,REGULAR_FONT);
+				drawText((free_pointers[0] = POKEMONDEX[Parties[1].Member[0]->Poke].Name),2,27,255,255,255,REGULAR_FONT);
 				free(free_pointers[0]);
 
 				sprintf((free_pointers[0] = malloc(4)),"%d",Parties[1].Member[0]->Level);
@@ -151,8 +151,7 @@ void DisplayDie(bool eop) {
 				drawText(free_pointers[0],225,125,255,255,255,SMALL_FONT);
 				free(free_pointers[0]);
 
-				drawText((free_pointers[0] = str_decompress_and_format(POKEMONDEX[Parties[0].Member[0]->Poke].Name)),154,103,255,255,255,REGULAR_FONT);
-				free(free_pointers[0]);
+				drawText(POKEMONDEX[Parties[0].Member[0]->Poke].Name,154,103,255,255,255,REGULAR_FONT);
 
 				sprintf((free_pointers[0] = malloc(4)),"%d",Parties[0].Member[0]->Level);
 				drawText(free_pointers[0],234,104,255,255,255,SECONDARY_FONT);
@@ -185,8 +184,7 @@ void DisplayDie(bool eop) {
 				drawText(free_pointers[0],73,49,255,255,255,SMALL_FONT);
 				free(free_pointers[0]);
 
-				drawText((free_pointers[0] = str_decompress_and_format(POKEMONDEX[Parties[1].Member[0]->Poke].Name)),2,27,255,255,255,REGULAR_FONT);
-				free(free_pointers[0]);
+				drawText(POKEMONDEX[Parties[1].Member[0]->Poke].Name,2,27,255,255,255,REGULAR_FONT);
 
 				sprintf((free_pointers[0] = malloc(4)),"%d",Parties[1].Member[0]->Level);
 				drawText(free_pointers[0],84,28,255,255,255,SECONDARY_FONT);

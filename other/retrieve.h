@@ -51,11 +51,13 @@ void RetrieveUserMove(bool eop) {
             if (event.type == SDL_KEYDOWN) {
 							if (event.key.keysym.sym == SDLK_j || event.key.keysym.sym == SDLK_f) {
 								if (!Menu) {
-									if (OptionSelect == 0) Menu = !Menu;
-									else if (OptionSelect == 1) BagViewer(1,eop);
- 									else if (OptionSelect == 2) {
-										if (PartyViewer(1,eop)) return;
-										}
+									if (OptionSelect == 0)
+										Menu = !Menu;
+									else if (OptionSelect == 1)
+										BagViewer(1,eop);
+ 									else if (OptionSelect == 2)
+										if (PartyViewer(1,eop))
+											return;
 								} else {
 									MoveSelected = OptionSelect;
 									Retrieving = 0;
@@ -109,7 +111,7 @@ void RetrieveUserMove(bool eop) {
 				sprintf(TempTextBuffer,"%d",Parties[0].Member[0]->Hp);
 				drawText(TempTextBuffer,225,125+!UpAndDown,255,255,255,SMALL_FONT);
 
-				drawText(str_decompress_format_prealloc(POKEMONDEX[Parties[0].Member[0]->Poke].Name,TempTextBuffer),154,103+!UpAndDown,255,255,255,REGULAR_FONT);
+				drawText(POKEMONDEX[Parties[0].Member[0]->Poke].Name,154,103+!UpAndDown,255,255,255,REGULAR_FONT);
 
 				sprintf(TempTextBuffer,"%d",Parties[0].Member[0]->Level);
 				drawText(TempTextBuffer,234,104+!UpAndDown,255,255,255,SECONDARY_FONT);
@@ -139,7 +141,7 @@ void RetrieveUserMove(bool eop) {
 				sprintf(TempTextBuffer,"%d",Parties[1].Member[0]->Hp);
 				drawText(TempTextBuffer,73,49,255,255,255,SMALL_FONT);
 
-				drawText(str_decompress_format_prealloc(POKEMONDEX[Parties[1].Member[0]->Poke].Name,TempTextBuffer),2,27,255,255,255,REGULAR_FONT);
+				drawText(POKEMONDEX[Parties[1].Member[0]->Poke].Name,2,27,255,255,255,REGULAR_FONT);
 
 				sprintf(TempTextBuffer,"%d",Parties[1].Member[0]->Level);
 				drawText(TempTextBuffer,84,28,255,255,255,SECONDARY_FONT);
@@ -170,7 +172,7 @@ void RetrieveUserMove(bool eop) {
 				drawText("FIGHT",152,154,0,0,0,REGULAR_FONT);
 				drawText("BAG",206,154,0,0,0,REGULAR_FONT);
 				drawText("POKEMON",152,172,0,0,0,REGULAR_FONT);
-		    drawText("RUN",206,172,0,0,0,REGULAR_FONT);
+		    	drawText("RUN",206,172,0,0,0,REGULAR_FONT);
 
 				DestRect.x = 144+((OptionSelect % 2)*54);
 				DestRect.y = 154+((OptionSelect > 1)*18);
@@ -190,10 +192,10 @@ void RetrieveUserMove(bool eop) {
 				DestRect.h = 44;
 				drawSelectionBox(&DestRect);
 
-				drawText(str_decompress_format_prealloc(MoveList[Parties[eop].Member[0]->Moves[0].Move].Name,TempTextBuffer),16,155,0,0,0,SMALL_FONT);
-				drawText(str_decompress_format_prealloc(MoveList[Parties[eop].Member[0]->Moves[1].Move].Name,TempTextBuffer),105,155,0,0,0,SMALL_FONT);
-				drawText(str_decompress_format_prealloc(MoveList[Parties[eop].Member[0]->Moves[2].Move].Name,TempTextBuffer),16,173,0,0,0,SMALL_FONT);
-				drawText(str_decompress_format_prealloc(MoveList[Parties[eop].Member[0]->Moves[3].Move].Name,TempTextBuffer),105,173,0,0,0,SMALL_FONT);
+				drawText(MoveList[Parties[eop].Member[0]->Moves[0].Move].Name,16,155,0,0,0,SMALL_FONT);
+				drawText(MoveList[Parties[eop].Member[0]->Moves[1].Move].Name,105,155,0,0,0,SMALL_FONT);
+				drawText(MoveList[Parties[eop].Member[0]->Moves[2].Move].Name,16,173,0,0,0,SMALL_FONT);
+				drawText(MoveList[Parties[eop].Member[0]->Moves[3].Move].Name,105,173,0,0,0,SMALL_FONT);
 				
 				sprintf(TempTextBuffer,"PP: %d/%0.f",Parties[eop].Member[0]->Moves[OptionSelect].PP,(MoveList[Parties[eop].Member[0]->Moves[OptionSelect].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[0]->Moves[OptionSelect].PPmult));
 				drawText(TempTextBuffer,192,154,0,0,0,REGULAR_FONT);

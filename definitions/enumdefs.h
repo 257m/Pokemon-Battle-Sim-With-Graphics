@@ -84,9 +84,12 @@ STATUS_TOXIC,
 STATUS_PARALYSIS,
 STATUS_SLEEP,
 STATUS_FREEZE,
-STATE_CONFUSION,
 STATE_FLINCH,
+STATUS_MAX,
 };
+
+#define EFFECT_STATUS_MAX STATUS_MAX-1
+#define ESM EFFECT_STATUS_MAX
 
 enum {
 STAT_ATK,
@@ -149,7 +152,7 @@ Gust,
 Thunder_Shock,
 Thunder_Wave,
 Swords_Dance,
-Dragon_Dance,
+Spirit_Dance,
 Will_O_Wisp,
 Spore,
 Toxic,
@@ -169,7 +172,7 @@ Octazooka,
 Sand_Attack,
 Smoke_Screen,
 Aurora_Beam,
-Baby_Doll_Eyes,
+Puppy_Dog_Eyes,
 Breaking_Swipe,
 Protect,
 Mercury_Shot,
@@ -215,7 +218,12 @@ enum {
 NoItem,
 Leftovers,
 Focus_Sash,
+Liechi_Berry,
+Ganlon_Berry,
+Petaya_Berry,
+Apicot_Berry,
 Salac_Berry,
+Lansat_Berry,
 ITEM_MAX,
 };
 
@@ -256,9 +264,14 @@ AF_TYPEIMMUNITY,
 
 enum {
 EFFECT_PROTECT,
-EFFECT_LEECH_SEED,
-EFFECT_PERISH_SONG,
 EFFECT_CONFUSION,
+};
+
+// Effect execution times
+enum {
+	EET_INFLICTION,
+	EET_PREMOVE,
+	EET_POSTMOVE
 };
 
 #define FLAG_MAKES_CONTACT 1

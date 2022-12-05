@@ -1,3 +1,5 @@
+void displaymember(unsigned int PartyMember,bool eop);
+
 void PokemonViewer(bool InBattle,bool eop,unsigned char PartyMember) {
 }
 
@@ -19,7 +21,7 @@ int PartyViewer(char InBattle,bool eop) {
 						}
 						else {
 							SelectionOpen = 1;
-							}
+						}
 						} else {
 						if (SelectionAction == 0) {
 							if (OptionSelect != 0 && Parties[eop].Member[OptionSelect]->CurrentHp) {
@@ -29,12 +31,14 @@ int PartyViewer(char InBattle,bool eop) {
 							return 1;
 								} else {
 								ResetBoosts(Parties[eop].Member[0]);
-            		CLEAR_EFFECTS(eop);
-            		CLEAR_EFFECT_COUNTERS(eop);
+            					CLEAR_EFFECTS(eop);
+            					CLEAR_EFFECT_COUNTERS(eop);
 								Switch(eop,OptionSelect);
 								return 1;
 								}
 								}
+						} else if (SelectionAction == 1) {
+							displaymember(OptionSelect,eop);
 						}
 						}
 				} else if (event.key.keysym.sym == SDLK_k || event.key.keysym.sym == SDLK_g) {
@@ -121,7 +125,7 @@ int PartyViewer(char InBattle,bool eop) {
 	  for (int i = 0;i < 3;i++) {
 			if (Parties[eop].Member[(i*2)+j] != NULL) {
 			SDL_RenderCopy(renderer,PartyTile,NULL,&SourceRect);
-			drawText(str_decompress_format_prealloc(POKEMONDEX[Parties[eop].Member[(i*2)+j]->Poke].Name,TempTextBuffer),SourceRect.x+40,SourceRect.y+6,255,255,255,REGULAR_FONT);
+			drawText(POKEMONDEX[Parties[eop].Member[(i*2)+j]->Poke].Name,SourceRect.x+40,SourceRect.y+6,255,255,255,REGULAR_FONT);
 			sprintf(TempTextBuffer,"Lvl %d",Parties[eop].Member[(i*2)+j]->Level);
 			drawText(TempTextBuffer,SourceRect.x+4,SourceRect.y+34,255,255,255,SMALL_FONT);
 			sprintf(TempTextBuffer,"/%d",Parties[eop].Member[(i*2)+j]->Hp);
@@ -191,7 +195,7 @@ void BagViewer(bool InBattle,bool eop) {
 
 void displaymember(unsigned int PartyMember,bool eop) {
     printf("\e[1;37mP%d:\e[0m\n",PartyMember+1);
-    printf("Pokemon: %s\n",str_decompress_and_format_free(POKEMONDEX[Parties[eop].Member[PartyMember]->Poke].Name));
+    printf("Pokemon: %s\n",POKEMONDEX[Parties[eop].Member[PartyMember]->Poke].Name);
     printf("Level: %d\n",Parties[eop].Member[PartyMember]->Level);
     printf("Health: %d/%d\n",Parties[eop].Member[PartyMember]->CurrentHp,Parties[eop].Member[PartyMember]->Hp);
     printf("Attack: %d\n",Parties[eop].Member[PartyMember]->Atk);
@@ -200,27 +204,15 @@ void displaymember(unsigned int PartyMember,bool eop) {
     printf("Special Defense: %d\n",Parties[eop].Member[PartyMember]->SpD);
     printf("Speed: %d\n",Parties[eop].Member[PartyMember]->Spe);
     printf("Nature: %s\n",NATURE_LIST[Parties[eop].Member[PartyMember]->Nature].NatureName);
-    printf("Move 1: %s %d/%.0f\n",str_decompress_and_format_free(MoveList[Parties[eop].Member[PartyMember]->Moves[0].Move].Name),Parties[eop].Member[PartyMember]->Moves[0].PP,(MoveList[Parties[eop].Member[PartyMember]->Moves[0].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[PartyMember]->Moves[0].PPmult));
-    printf("Move 2: %s %d/%.0f\n",str_decompress_and_format_free(MoveList[Parties[eop].Member[PartyMember]->Moves[1].Move].Name),Parties[eop].Member[PartyMember]->Moves[1].PP,(MoveList[Parties[eop].Member[PartyMember]->Moves[1].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[PartyMember]->Moves[1].PPmult));
-    printf("Move 3: %s %d/%.0f\n",str_decompress_and_format_free(MoveList[Parties[eop].Member[PartyMember]->Moves[2].Move].Name),Parties[eop].Member[PartyMember]->Moves[2].PP,(MoveList[Parties[eop].Member[PartyMember]->Moves[2].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[PartyMember]->Moves[2].PPmult));
-    printf("Move 4: %s %d/%.0f\n",str_decompress_and_format_free(MoveList[Parties[eop].Member[PartyMember]->Moves[3].Move].Name),Parties[eop].Member[PartyMember]->Moves[3].PP,(MoveList[Parties[eop].Member[PartyMember]->Moves[3].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[PartyMember]->Moves[3].PPmult));
+    printf("Move 1: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Moves[0].Move].Name,Parties[eop].Member[PartyMember]->Moves[0].PP,(MoveList[Parties[eop].Member[PartyMember]->Moves[0].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[PartyMember]->Moves[0].PPmult));
+    printf("Move 2: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Moves[1].Move].Name,Parties[eop].Member[PartyMember]->Moves[1].PP,(MoveList[Parties[eop].Member[PartyMember]->Moves[1].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[PartyMember]->Moves[1].PPmult));
+    printf("Move 3: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Moves[2].Move].Name,Parties[eop].Member[PartyMember]->Moves[2].PP,(MoveList[Parties[eop].Member[PartyMember]->Moves[2].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[PartyMember]->Moves[2].PPmult));
+    printf("Move 4: %s %d/%.0f\n",MoveList[Parties[eop].Member[PartyMember]->Moves[3].Move].Name,Parties[eop].Member[PartyMember]->Moves[3].PP,(MoveList[Parties[eop].Member[PartyMember]->Moves[3].Move].PP+1) * 5 * ppboostmult(Parties[eop].Member[PartyMember]->Moves[3].PPmult));
     printf("Item: %s (%s)\n",ItemList[Parties[eop].Member[PartyMember]->Item].Name,Itemtext[Parties[eop].Member[PartyMember]->ItemUsable]);
     printf("Ability: %s\n",AbilityList[Parties[eop].Member[PartyMember]->Ability].Name);
     printf("Status: %s\n",Statusnames[Parties[eop].Member[PartyMember]->Non_Volatile_Status]);
     printf("IVs: %d %d %d %d %d %d\n",Parties[eop].Member[PartyMember]->IVHp,Parties[eop].Member[PartyMember]->IVAtk,Parties[eop].Member[PartyMember]->IVDef,Parties[eop].Member[PartyMember]->IVSpA,Parties[eop].Member[PartyMember]->IVSpD,Parties[eop].Member[PartyMember]->IVSpe);
    printf("EVs: %d %d %d %d %d %d\n",Parties[eop].Member[PartyMember]->EVS[Hp],Parties[eop].Member[PartyMember]->EVS[Atk],Parties[eop].Member[PartyMember]->EVS[Def],Parties[eop].Member[PartyMember]->EVS[SpA],Parties[eop].Member[PartyMember]->EVS[SpD],Parties[eop].Member[PartyMember]->EVS[Spe]);
-  printf("\e[?25l");
-  system ("/bin/stty raw");
-  system ("/bin/stty -echo");
-  getchar();
-  system ("/bin/stty echo");
-  system ("/bin/stty cooked");
-  printf("\e[?25h");
-  printf("\033[2K\r");
-  for (int i = 0;i < 20;i++) {
-      printf("\033[1A");
-      printf("\033[2K");
-        }
 }
 
 void displayparty(bool eop) {

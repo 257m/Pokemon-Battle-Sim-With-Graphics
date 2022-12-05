@@ -42,10 +42,8 @@ void TextBoxUpdate(char *text, unsigned int character_delay, unsigned int pause)
 		sprintf(TempTextBuffer2, "%d", Parties[0].Member[0]->Hp);
 		drawText(TempTextBuffer2, 225, 125, 255, 255, 255, SMALL_FONT);
 
-		drawText(
-			str_decompress_format_prealloc(
-				POKEMONDEX[Parties[0].Member[0]->Poke].Name, TempTextBuffer2),
-			154, 103, 255, 255, 255, REGULAR_FONT);
+		drawText(POKEMONDEX[Parties[0].Member[0]->Poke].Name,
+		154, 103, 255, 255, 255, REGULAR_FONT);
 
 		sprintf(TempTextBuffer2, "%d", Parties[0].Member[0]->Level);
 		drawText(TempTextBuffer2, 234, 104, 255, 255, 255, SECONDARY_FONT);
@@ -82,10 +80,7 @@ void TextBoxUpdate(char *text, unsigned int character_delay, unsigned int pause)
 		sprintf(TempTextBuffer2, "%d", Parties[1].Member[0]->Hp);
 		drawText(TempTextBuffer2, 73, 49, 255, 255, 255, SMALL_FONT);
 
-		drawText(
-			str_decompress_format_prealloc(
-				POKEMONDEX[Parties[1].Member[0]->Poke].Name, TempTextBuffer2),
-			2, 27, 255, 255, 255, REGULAR_FONT);
+		drawText(POKEMONDEX[Parties[1].Member[0]->Poke].Name,2, 27, 255, 255, 255, REGULAR_FONT);
 
 		sprintf(TempTextBuffer2, "%d", Parties[1].Member[0]->Level);
 		drawText(TempTextBuffer2, 84, 28, 255, 255, 255, SECONDARY_FONT);
@@ -173,9 +168,7 @@ void TextBoxUpdateFast(
 	sprintf(TempTextBuffer2, "%d", Parties[0].Member[0]->Hp);
 	drawText(TempTextBuffer2, 225, 125, 255, 255, 255, SMALL_FONT);
 
-	drawText(str_decompress_format_prealloc(
-				 POKEMONDEX[Parties[0].Member[0]->Poke].Name, TempTextBuffer2),
-		154, 103, 255, 255, 255, REGULAR_FONT);
+	drawText(POKEMONDEX[Parties[0].Member[0]->Poke].Name, 154, 103, 255, 255, 255, REGULAR_FONT);
 
 	sprintf(TempTextBuffer2, "%d", Parties[0].Member[0]->Level);
 	drawText(TempTextBuffer2, 234, 104, 255, 255, 255, SECONDARY_FONT);
@@ -212,9 +205,7 @@ void TextBoxUpdateFast(
 	sprintf(TempTextBuffer2, "%d", Parties[1].Member[0]->Hp);
 	drawText(TempTextBuffer2, 73, 49, 255, 255, 255, SMALL_FONT);
 
-	drawText(str_decompress_format_prealloc(
-				 POKEMONDEX[Parties[1].Member[0]->Poke].Name, TempTextBuffer2),
-		2, 27, 255, 255, 255, REGULAR_FONT);
+	drawText(POKEMONDEX[Parties[1].Member[0]->Poke].Name, 2, 27, 255, 255, 255, REGULAR_FONT);
 
 	sprintf(TempTextBuffer2, "%d", Parties[1].Member[0]->Level);
 	drawText(TempTextBuffer2, 84, 28, 255, 255, 255, SECONDARY_FONT);
@@ -288,18 +279,13 @@ void TextBoxUpdateFast(
 void display_move(bool eop)
 {
 	if (Parties[eop].CanMove) {
-		sprintf(TempTextBuffer, "%s%s used %s!", EOPTEXT[eop],
-			str_decompress_format_prealloc(
-				POKEMONDEX[Parties[eop].Member[0]->Poke].Name, TempTextBuffer3),
-			str_decompress_format_prealloc(
-				MoveList[Parties[eop].Turn->Move].Name, TempTextBuffer2));
+		sprintf(TempTextBuffer, "%s%s used %s!", EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name,MoveList[Parties[eop].Turn->Move].Name);
 		TextBoxUpdateFast(TempTextBuffer, 50, 1000);
 		if (!Parties[eop].Hit)
 			TextBoxUpdateFast("But it missed!", 50, 1000);
 	}
 	else if (!Parties[eop].Confused) {
-		sprintf(TempTextBuffer, "%s%s couldn't move", EOPTEXT[eop],
-			str_decompress_format_prealloc( POKEMONDEX[Parties[eop].Member[0]->Poke].Name, TempTextBuffer3));
+		sprintf(TempTextBuffer, "%s%s couldn't move",EOPTEXT[eop],POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
 		TextBoxUpdateFast(TempTextBuffer, 50, 1000);
 		if (Parties[eop].Flinch)
 			TextBoxUpdateFast("It flinched!", 50, 1000);
@@ -340,10 +326,7 @@ void move_result(bool eop)
 									 [POKEMONDEX[Parties[!eop].Member[0]->Poke]
 											 .Type2] <=
 						0) {
-						sprintf(TempTextBuffer, "It dosen't affect %s",
-							str_decompress_format_prealloc(
-								POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,
-								TempTextBuffer2));
+						sprintf(TempTextBuffer, "It dosen't affect %s",POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
 						TextBoxUpdateFast(TempTextBuffer, 50, 1000);
 					}
 					else
@@ -356,24 +339,18 @@ void move_result(bool eop)
 			else {
 				if (CHK_BIT(Parties[!eop].EFFECT_FLAGS[0], EFFECT_PROTECT)) {
 					sprintf(TempTextBuffer, "%s%s protected itself!",
-						EOPTEXT[!eop],
-						str_decompress_format_prealloc(
-							POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,
-							TempTextBuffer2));
+						EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
 					TextBoxUpdateFast(TempTextBuffer, 50, 1000);
 				}
 				else {
 					sprintf(TempTextBuffer, "It had no effect on %s%s...",
 						EOPTEXT[!eop + 2],
-						str_decompress_format_prealloc(
-							POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,
-							TempTextBuffer2));
+						POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
 					TextBoxUpdateFast(TempTextBuffer, 50, 1000);
 				}
 			}
 			printf("%s%s is at %d/%d hp\n", EOPTEXT[!eop],
-				str_decompress_and_format_free(
-					POKEMONDEX[Parties[!eop].Member[0]->Poke].Name),
+					POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,
 				Parties[!eop].Member[0]->CurrentHp,
 				Parties[!eop].Member[0]->Hp);
 		}
@@ -381,10 +358,7 @@ void move_result(bool eop)
 
 	if (Parties[!eop].Member[0]->CurrentHp <= 0) {
 		DisplayDie(!eop);
-		sprintf(TempTextBuffer, "%s%s fainted!", EOPTEXT[!eop],
-			str_decompress_format_prealloc(
-				POKEMONDEX[Parties[!eop].Member[0]->Poke].Name,
-				TempTextBuffer2));
+		sprintf(TempTextBuffer, "%s%s fainted!", EOPTEXT[!eop],POKEMONDEX[Parties[!eop].Member[0]->Poke].Name);
 		TextBoxUpdateFast(TempTextBuffer, 50, 1000);
 		SwitchIn(!eop);
 		Parties[!eop].Dead = 1;

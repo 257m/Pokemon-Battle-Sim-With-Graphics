@@ -76,7 +76,7 @@ struct MyPokemon* pokemon_randomize(struct MyPokemon* pokemon) {
 #define pokemon_delete(pokepointer) free(pokepointer); pokepointer = NULL;
 
 struct MyPokemon Pokemon1 = {
-.Poke = PIDGEY,
+.Poke = ILLSONAR,
 .Level = 100,
 .CurrentHp = 20,
 .Item = Focus_Sash,
@@ -208,7 +208,7 @@ struct MyPokemon Pokemon6 = {
 };
 
 struct MyPokemon EnemyPokemon1 = {
-.Poke = SLOR,
+.Poke = DAROASINAUGHT,
 .Level = 100,
 .CurrentHp = 20,
 .Item = Focus_Sash,
