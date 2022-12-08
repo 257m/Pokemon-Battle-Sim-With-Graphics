@@ -1,19 +1,10 @@
-enum {
-	REGULAR_FONT,
-	SECONDARY_FONT,
-	SMALL_FONT,
-	FONT_max
-};
+unsigned char FONT_SIZES [FONT_MAX] = {12,12,10};
 
-#define FONT_TEXTURE_SIZE 512
-unsigned char FONT_SIZES[] = {12,12,10};
-#define NUM_GLYPHS 128
+TTF_Font *fonts[FONT_MAX];
+SDL_Rect glyphs[FONT_MAX][NUM_GLYPHS];
+SDL_Texture *fontTextures[FONT_MAX];
 
-static TTF_Font *fonts[FONT_max];
-static SDL_Rect glyphs[FONT_max][NUM_GLYPHS];
-static SDL_Texture *fontTextures[FONT_max];
-
-SDL_Color white = {255,255,255,255};
+static SDL_Color white = {255,255,255,255};
 
 SDL_Texture *toTexture(SDL_Surface *surface, int destroySurface)
 {
@@ -29,7 +20,7 @@ SDL_Texture *toTexture(SDL_Surface *surface, int destroySurface)
 	return texture;
 }
 
-static void InitFont(int fontType, char *filename,unsigned char Font_Size,bool Solid)
+void InitFont(int fontType, char *filename,unsigned char Font_Size,bool Solid)
 {
 	SDL_Surface *surface, *text;
 	SDL_Rect dest;
