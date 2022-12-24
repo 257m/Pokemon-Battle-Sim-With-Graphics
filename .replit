@@ -1,2 +1,1 @@
-compile = ["make","-s"]
-run = "./main"
+run = "cd project && make"

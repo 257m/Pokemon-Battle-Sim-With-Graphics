@@ -1,6 +1,8 @@
 #ifndef DRAWING_H
 #define DRAWING_H
 
+#include "common.h"
+
 void UpdateBattle();
 void DisplayDie(bool eop);
 
@@ -27,6 +29,6 @@ SDL_Texture *getTextTexture(char *text, int type);
 extern bool IsPrinting;
 char drawScrollingText(char *text, int x, int y, int r, int g, int b, int fontType, unsigned int delay);
 
-void drawSelectionBox(SDL_Rect* rect)
+void drawSelectionBox(SDL_Rect* rect);
 
 #endif // DRAWING_H //

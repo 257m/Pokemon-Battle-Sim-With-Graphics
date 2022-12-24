@@ -1,10 +1,14 @@
-unsigned char FONT_SIZES [FONT_MAX] = {12,12,10};
+#include "../include/common.h"
+#include "../include/drawing.h"
+#include "../include/sdldef.h"
+
+unsigned char FONT_SIZES[FONT_MAX] = {12, 12, 10};
 
 TTF_Font *fonts[FONT_MAX];
 SDL_Rect glyphs[FONT_MAX][NUM_GLYPHS];
 SDL_Texture *fontTextures[FONT_MAX];
 
-static SDL_Color white = {255,255,255,255};
+SDL_Color white = {255, 255, 255, 255};
 
 SDL_Texture *toTexture(SDL_Surface *surface, int destroySurface)
 {
@@ -12,15 +16,14 @@ SDL_Texture *toTexture(SDL_Surface *surface, int destroySurface)
 
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 
-	if (destroySurface)
-	{
+	if (destroySurface) {
 		SDL_FreeSurface(surface);
 	}
 
 	return texture;
 }
 
-void InitFont(int fontType, char *filename,unsigned char Font_Size,bool Solid)
+void InitFont(int fontType, char *filename, unsigned char Font_Size, bool Solid)
 {
 	SDL_Surface *surface, *text;
 	SDL_Rect dest;
@@ -32,31 +35,35 @@ void InitFont(int fontType, char *filename,unsigned char Font_Size,bool Solid)
 
 	fonts[fontType] = TTF_OpenFont(filename, Font_Size);
 
-	surface = SDL_CreateRGBSurface(0, FONT_TEXTURE_SIZE, FONT_TEXTURE_SIZE, 32, 0, 0, 0, 0xff);
+	surface = SDL_CreateRGBSurface(
+		0, FONT_TEXTURE_SIZE, FONT_TEXTURE_SIZE, 32, 0, 0, 0, 0xff);
 
-	SDL_SetColorKey(surface, SDL_TRUE, SDL_MapRGBA(surface->format, 0, 0, 0, 0));
+	SDL_SetColorKey(
+		surface, SDL_TRUE, SDL_MapRGBA(surface->format, 0, 0, 0, 0));
 
 	dest.x = 0;
 	dest.y = 0;
 
-	for (i = ' ' ; i <= 'z' ; i++)
-	{
+	for (i = ' '; i <= 'z'; i++) {
 		c[0] = i;
 		c[1] = 0;
-		if (Solid) text = TTF_RenderUTF8_Solid(fonts[fontType], c, white);
-		else text = TTF_RenderUTF8_Blended(fonts[fontType], c, white);
+		if (Solid)
+			text = TTF_RenderUTF8_Solid(fonts[fontType], c, white);
+		else
+			text = TTF_RenderUTF8_Blended(fonts[fontType], c, white);
 
 		TTF_SizeText(fonts[fontType], c, &dest.w, &dest.h);
 
-		if (dest.x + dest.w >= FONT_TEXTURE_SIZE)
-		{
+		if (dest.x + dest.w >= FONT_TEXTURE_SIZE) {
 			dest.x = 0;
 
 			dest.y += dest.h + 1;
 
-			if (dest.y + dest.h >= FONT_TEXTURE_SIZE)
-			{
-				SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_CRITICAL, "Out of glyph space in %dx%d font atlas texture map.", FONT_TEXTURE_SIZE, FONT_TEXTURE_SIZE);
+			if (dest.y + dest.h >= FONT_TEXTURE_SIZE) {
+				SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION,
+					SDL_LOG_PRIORITY_CRITICAL,
+					"Out of glyph space in %dx%d font atlas texture map.",
+					FONT_TEXTURE_SIZE, FONT_TEXTURE_SIZE);
 				exit(1);
 			}
 		}
@@ -80,9 +87,9 @@ void InitFont(int fontType, char *filename,unsigned char Font_Size,bool Solid)
 
 void InitFonts(void)
 {
-	InitFont(REGULAR_FONT, "fonts/pkmndp.ttf",FONT_SIZES[0],1);
-	InitFont(SECONDARY_FONT, "fonts/pkmnem.ttf",FONT_SIZES[1],1);
-	InitFont(SMALL_FONT, "fonts/pkmnems.ttf",FONT_SIZES[2],1);
+	InitFont(REGULAR_FONT, "fonts/pkmndp.ttf", FONT_SIZES[0], 1);
+	InitFont(SECONDARY_FONT, "fonts/pkmnem.ttf", FONT_SIZES[1], 1);
+	InitFont(SMALL_FONT, "fonts/pkmnems.ttf", FONT_SIZES[2], 1);
 }
 
 void drawText(char *text, int x, int y, int r, int g, int b, int fontType)
@@ -96,8 +103,7 @@ void drawText(char *text, int x, int y, int r, int g, int b, int fontType)
 
 	character = text[i++];
 
-	while (character)
-	{
+	while (character) {
 		glyph = &glyphs[fontType][character];
 
 		dest.x = x;
@@ -113,7 +119,8 @@ void drawText(char *text, int x, int y, int r, int g, int b, int fontType)
 	}
 }
 
-void drawTextSize(char *text, int x, int y, int r, int g, int b, int fontType, unsigned char TextSize)
+void drawTextSize(char *text, int x, int y, int r, int g, int b, int fontType,
+	unsigned char TextSize)
 {
 	int i, character;
 	SDL_Rect *glyph, dest;
@@ -124,8 +131,7 @@ void drawTextSize(char *text, int x, int y, int r, int g, int b, int fontType, u
 
 	character = text[i++];
 
-	while (character)
-	{
+	while (character) {
 		glyph = &glyphs[fontType][character];
 
 		dest.x = x;
@@ -152,21 +158,22 @@ SDL_Texture *getTextTexture(char *text, int type)
 
 bool IsPrinting;
 
-char drawScrollingText(char *text, int x, int y, int r, int g, int b, int fontType, unsigned int delay)
+char drawScrollingText(char *text, int x, int y, int r, int g, int b,
+	int fontType, unsigned int delay)
 {
 	int i, character;
 	static unsigned int max, start_time;
 	SDL_Rect *glyph, dest;
-	
+
 	if (!IsPrinting) {
 		IsPrinting = 1;
 		max = 1;
 		start_time = SDL_GetTicks();
-		}
+	}
 	else {
-		max = ((SDL_GetTicks() - start_time))/delay;
+		max = ((SDL_GetTicks() - start_time)) / delay;
 		max++;
-		}
+	}
 
 	SDL_SetTextureColorMod(fontTextures[fontType], r, g, b);
 
@@ -174,13 +181,12 @@ char drawScrollingText(char *text, int x, int y, int r, int g, int b, int fontTy
 
 	character = text[i++];
 
-	while (i < max)
-	{
+	while (i < max) {
 		if (!character) {
 			IsPrinting = 0;
 			return 0;
 		}
-		
+
 		glyph = &glyphs[fontType][character];
 
 		dest.x = x;
@@ -194,6 +200,6 @@ char drawScrollingText(char *text, int x, int y, int r, int g, int b, int fontTy
 
 		character = text[i++];
 	}
-	//printf("%d\n",max);
+	// printf("%d\n",max);
 	return 1;
 }

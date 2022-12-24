@@ -1,6 +1,7 @@
 { pkgs }: {
 	deps = [
-		pkgs.indent
+		pkgs.linuxquota
+  pkgs.indent
   pkgs.cloc
   pkgs.htop
   pkgs.vim

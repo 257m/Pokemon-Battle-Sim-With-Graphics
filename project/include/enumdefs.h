@@ -20,6 +20,7 @@ ICE,
 METAL,
 ROCK,
 MARTIAL,
+TYPE_MAX,
 };
 
 enum {
@@ -197,6 +198,7 @@ Double_Edge,
 Flash_Stream,
 Photon_Blast,
 Photon_Slash,
+Tremor,
 MOVE_MAX,
 };
 
@@ -209,6 +211,7 @@ MF_PROTECT,
 MF_ROAR,
 MF_DRAININGMOVE,
 MF_EDGECASE,
+MF_MAX,
 };
 
 enum {
@@ -235,6 +238,7 @@ TF_NONE,
 TF_LEFTOVERS,
 TF_FOCUS_SASH,
 TF_BERRIES,
+TF_MAX,
 };
 
 enum {
