@@ -27,13 +27,12 @@ SDL_Texture *Battle_Background;
 SDL_Texture *TextBox;
 SDL_Texture *HpBar;
 SDL_Texture *EnemyHpBar;
-SDL_Texture *RetrieveBox;
-SDL_Texture *TypePPBox;
 SDL_Texture *Indicator;
-SDL_Texture *MoveSelectionBox;
 SDL_Texture *PartyTile;
 SDL_Texture *Corners;
-SDL_Texture *MoveSlotBox;
+SDL_Texture *MoveViewPage;
+SDL_Texture* Pokemon_Summary_Background;
+SDL_Texture* TypeLabels;
 
 SDL_Texture *initialize_texture_from_file(
 	const char *file_name, SDL_Renderer *rend)

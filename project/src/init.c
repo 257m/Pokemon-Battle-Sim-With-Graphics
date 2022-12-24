@@ -39,16 +39,15 @@ void InitSDL()
 	HpBar = initialize_texture_from_file("Images/HpBar.png", renderer);
 	EnemyHpBar =
 		initialize_texture_from_file("Images/EnemyHpBar.png", renderer);
-	RetrieveBox =
-		initialize_texture_from_file("Images/RetrieveBox.png", renderer);
 	Indicator = initialize_texture_from_file("Images/Indicator.png", renderer);
-	TypePPBox = initialize_texture_from_file("Images/TypePPBox.png", renderer);
-	MoveSelectionBox =
-		initialize_texture_from_file("Images/MoveSelectionBox.png", renderer);
 	PartyTile = initialize_texture_from_file("Images/PartyTile.png", renderer);
 	Corners = initialize_texture_from_file("Images/Corners.png", renderer);
-	MoveSlotBox =
-		initialize_texture_from_file("Images/MoveSlotBox.png", renderer);
+	MoveViewPage = initialize_texture_from_file(
+		"Images/BW_Summary/Graphics/Pictures/Summary/bg_4_B2W2.png", renderer);
+	Pokemon_Summary_Background = initialize_texture_from_file(
+		"Images/BW_Summary/Graphics/Pictures/Summary/background.png", renderer);
+	TypeLabels = initialize_texture_from_file(
+		"Images/typelabels.png", renderer);
 
 	TTF_Init();
 	InitFonts();

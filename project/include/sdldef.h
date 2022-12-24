@@ -39,13 +39,12 @@ extern SDL_Texture* Battle_Background;
 extern SDL_Texture* TextBox;
 extern SDL_Texture* HpBar;
 extern SDL_Texture* EnemyHpBar;
-extern SDL_Texture* RetrieveBox;
-extern SDL_Texture* TypePPBox;
 extern SDL_Texture* Indicator;
-extern SDL_Texture* MoveSelectionBox;
 extern SDL_Texture* PartyTile;
 extern SDL_Texture* Corners;
-extern SDL_Texture* MoveSlotBox;
+extern SDL_Texture* MoveViewPage;
+extern SDL_Texture* Pokemon_Summary_Background;
+extern SDL_Texture* TypeLabels;
 
 typedef struct {
 float x;

@@ -12,43 +12,50 @@
 
 void PokemonViewer(bool InBattle, bool eop, unsigned char PartyMember)
 {
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderClear(renderer);
+	DestRect.x = 0;
+	DestRect.y = 0;
+	DestRect.w = width;
+	DestRect.h = height;
+	SDL_RenderCopy(renderer, Pokemon_Summary_Background, NULL, &DestRect);
+	SDL_RenderCopy(renderer, MoveViewPage, NULL, &DestRect);
+	DestRect.x = 18;
+	DestRect.w = 32;
+	DestRect.h = 14;
+	SourceRect.x = 0;
+	SourceRect.w = 32;
+	SourceRect.h = 14;
 	for (int i = 0; i < 4; i++) {
-		DestRect.x = 16;
-		DestRect.y = 16 + 34 * i;
-		DestRect.w = 118;
-		DestRect.h = 32;
-		SDL_RenderCopy(renderer, MoveSlotBox, NULL, &DestRect);
-
 		drawText(MoveList[Parties[eop].Member[PartyMember]->Moves[i].Move].Name,
-			12 + DestRect.x, 8 + DestRect.y, 255, 255, 255, SMALL_FONT);
+			58, 45 + 32 * i, 255, 255, 255, SMALL_FONT);
 		char PPtext[12];
 		sprintf(PPtext, "PP: %d/%0.f",
 			Parties[eop].Member[PartyMember]->Moves[i].PP,
 			(MoveList[Parties[eop].Member[PartyMember]->Moves[i].Move].PP + 1) *
 				5 *
 				ppboostmult(Parties[eop].Member[PartyMember]->Moves[i].PPmult));
-		drawText(PPtext, 67 + DestRect.x, 20 + DestRect.y, 255, 255, 255,
-			SMALL_FONT);
-
-		DestRect.x = 152;
-		DestRect.y = 30;
-		DestRect.w = 80;
-		DestRect.h = 80;
-		SDL_RenderCopy(renderer,
-			Pokemon_Front_Sprites[Parties[eop].Member[PartyMember]->Poke], NULL,
-			&DestRect);
+		drawText(PPtext, 87, 59 + 32 * i, 255, 255, 255, SMALL_FONT);
+		DestRect.y = 43 + 32 * i;
+		SourceRect.y = 14 * MoveList[Parties[eop].Member[PartyMember]->Moves[i].Move].Type;
+		SDL_RenderCopy(renderer, TypeLabels, &SourceRect, &DestRect);
 	}
+	DestRect.x = 152;
+	DestRect.y = 30;
+	DestRect.w = 80;
+	DestRect.h = 80;
+	SDL_RenderCopy(renderer,
+		Pokemon_Front_Sprites[Parties[eop].Member[PartyMember]->Poke], NULL,
+		&DestRect);
+	sprintf(TempTextBuffer,"%d",Parties[eop].Member[PartyMember]->Level);
+	drawText(TempTextBuffer, 174, 45, 64, 64, 64, SMALL_FONT);
 	SDL_RenderPresent(renderer);
 	while (1) {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_KEYDOWN) {
 				switch (event.key.keysym.sym) {
-					case SDLK_k:
-						goto end;
-					case SDL_g:
-						goto end;
+				case SDLK_k:
+					goto end;
+				case SDLK_g:
+					goto end;
 				}
 			}
 		}
