@@ -82,6 +82,6 @@ x | i need to rewrite some of the my old code that use tt with the ternary opera
 
 x | Make status infliction move support any arbitrary effect
 
-o | Make a macro system for execution times for clarity of code and organization
+o | Make a macro system for execution times for clarity of code and organization // this is always going to be thing that needs to be done but isn't ever
 
-o | Make effect functions actually do something
+x | Make effect functions actually do something
