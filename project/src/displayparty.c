@@ -9,6 +9,7 @@
 #include "../include/pokemon.h"
 #include "../include/sdldef.h"
 #include "../include/switching.h"
+#include "../include/offsets.h"
 
 void PokemonViewer(bool InBattle, bool eop, unsigned char PartyMember)
 {
@@ -38,8 +39,8 @@ void PokemonViewer(bool InBattle, bool eop, unsigned char PartyMember)
 		SourceRect.y = 14 * MoveList[Parties[eop].Member[PartyMember]->Moves[i].Move].Type;
 		SDL_RenderCopy(renderer, TypeLabels, &SourceRect, &DestRect);
 	}
-	DestRect.x = 152;
-	DestRect.y = 30;
+	DestRect.x = 168;
+	DestRect.y = 65+Pokemon_Front_Sprite_Offsets_y[Parties[eop].Member[PartyMember]->Poke];
 	DestRect.w = 80;
 	DestRect.h = 80;
 	SDL_RenderCopy(renderer,
@@ -47,6 +48,7 @@ void PokemonViewer(bool InBattle, bool eop, unsigned char PartyMember)
 		&DestRect);
 	sprintf(TempTextBuffer,"%d",Parties[eop].Member[PartyMember]->Level);
 	drawText(TempTextBuffer, 174, 45, 64, 64, 64, SMALL_FONT);
+	drawText(POKEMONDEX[Parties[eop].Member[PartyMember]->Poke].Name, 165, 25, 64, 64, 64, REGULAR_FONT);
 	SDL_RenderPresent(renderer);
 	while (1) {
 		while (SDL_PollEvent(&event)) {
