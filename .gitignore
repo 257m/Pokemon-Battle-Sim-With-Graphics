@@ -1,0 +1,6 @@
+*.[oa]
+*~
+Plugins/
+/output.txt
+/temptxt.txt
+/project/oldmake
