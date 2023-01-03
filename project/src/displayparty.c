@@ -37,9 +37,9 @@ GeneralInfo:
 	while (1) {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT)
-                ExitProgram();
+				ExitProgram();
 			if (event.type == SDL_KEYDOWN) {
-				if (event.key.keysym.sym == SDLK_escape)
+				if (event.key.keysym.sym == SDLK_ESCAPE)
 					ExitProgram();
 				switch (event.key.keysym.sym) {
 					case SDLK_k:
