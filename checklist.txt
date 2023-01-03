@@ -85,3 +85,5 @@ x | Make status infliction move support any arbitrary effect
 o | Make a macro system for execution times for clarity of code and organization // this is always going to be thing that needs to be done but isn't ever
 
 x | Make effect functions actually do something
+
+o | Add drop shadows to text
