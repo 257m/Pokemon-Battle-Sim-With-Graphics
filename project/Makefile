@@ -20,7 +20,7 @@ SRC = $(wildcard src/*.c)
 OBJ = $(patsubst src/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # This is the default target that is going to be built when we run 'make'
-all: make_obj $(EXE) run
+all: $(EXE) run
 
 # This is the rule to build the executable
 $(EXE): $(OBJ)
@@ -29,10 +29,6 @@ $(EXE): $(OBJ)
 # This is the rule to build the object files
 $(OBJ_DIR)/%.o: src/%.c
 		$(CC) $(CFLAGS) $< -o $@
-
-# If the direcotry obj does not exist make one
-make_obj:
-	mkdir -p $(OBJ_DIR)
 
 # This is used to run the program
 run:
