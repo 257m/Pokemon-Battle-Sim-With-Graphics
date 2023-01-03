@@ -4,8 +4,8 @@
 CC = clang
 
 # These are the flags we are going to pass to the compiler
-CFLAGS = -c -Wall -g -Wno-everything -pthread -D_REENTRANT -I/nix/store/i8yhzspzcfhasp2drclzcx69ll764i4n-SDL2-2.0.14-dev/include/SDL2
-LFLAGS = -lm -L/nix/store/nli3cgripsmk1fjabb81arsgz8437g54-SDL2-2.0.14/lib -Wl,-rpath,/nix/store/nli3cgripsmk1fjabb81arsgz8437g54-SDL2-2.0.14/lib -Wl,--enable-new-dtags -lSDL2 -lSDL2_image -lSDL2_ttf
+CFLAGS = -c -Wall -g -Wno-everything -pthread `sdl2-config --cflags`
+LFLAGS = -lm -lSDL2 -lSDL2_image -lSDL2_ttf
 
 # This is the name of the executable we are going to create
 EXE = main
