@@ -1,0 +1,1 @@
+o | There is a bug with the charizard front sprite not loading in // I'm too tired to fix it right now though
