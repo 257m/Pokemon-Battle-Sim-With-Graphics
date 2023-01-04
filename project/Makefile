@@ -40,3 +40,6 @@ clean:
 
 format:
 		clang-format -i -style=file $(SRC)
+
+add_obj:
+	mkdir -p obj
