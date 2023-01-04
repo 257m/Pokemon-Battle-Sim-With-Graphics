@@ -1,6 +1,7 @@
 { pkgs }: {
 	deps = [
-    	pkgs.unar
+    	pkgs.gh
+     pkgs.unar
     	pkgs.indent
   		pkgs.cloc
   		pkgs.htop
