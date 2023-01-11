@@ -221,7 +221,7 @@ void RetrieveUserMove(bool eop)
 
 			DestRect.x = 149;
 			DestRect.y =
-				16 + Pokemon_Front_Sprite_Offsets_y[Parties[1].Member[0]->Poke];
+				16 + (int8_t)Pokemon_Front_Sprite_Offsets_y[Parties[1].Member[0]->Poke];
 			SDL_RenderCopy(renderer,
 						   Pokemon_Front_Sprites[Parties[1].Member[0]->Poke],
 						   NULL, &DestRect);
