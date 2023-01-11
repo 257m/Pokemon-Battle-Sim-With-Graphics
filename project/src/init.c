@@ -51,6 +51,8 @@ void InitSDL()
 		"Images/BW_Summary/Graphics/Pictures/Summary/bg_1_B2W2.png", renderer);
 	TypeLabels =
 		initialize_texture_from_file("Images/typelabels.png", renderer);
+	CategoryIcons = initialize_texture_from_file(
+		"Images/BW_Summary/Graphics/Pictures/category.png", renderer);
 
 	TTF_Init();
 	InitFonts();

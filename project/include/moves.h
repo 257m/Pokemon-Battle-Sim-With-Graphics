@@ -17,4 +17,15 @@ extern mf MOVE_FUNC_LIST [MF_MAX];
 extern MoveSlot Empty_slot;
 extern MoveSlot Struggle_Slot;
 
+enum {
+	HEAL_SELF_STATIC,
+	HEAL_SELF_MAX,
+	HEAL_SELF_CURRENT,
+	HEAL_SELF_LOST,
+	HEAL_OTHER_STATIC,
+	HEAL_OTHER_MAX,
+	HEAL_OTHER_CURRENT,
+	HEAL_OTHER_LOST,
+};
+
 #endif // MOVES_H //
