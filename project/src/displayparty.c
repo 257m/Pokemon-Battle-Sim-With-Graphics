@@ -65,12 +65,7 @@ MoveSummaryScreen:
 	DestRect.h = height;
 	SDL_RenderCopy(renderer, Pokemon_Summary_Background, NULL, &DestRect);
 	SDL_RenderCopy(renderer, MoveViewPage, NULL, &DestRect);
-	DestRect.x = 18;
-	DestRect.w = 32;
-	DestRect.h = 14;
 	SourceRect.x = 0;
-	SourceRect.w = 32;
-	SourceRect.h = 14;
 	for (int i = 0; i < 4; i++) {
 		drawText(MoveList[Parties[eop].Member[PartyMember]->Moves[i].Move].Name,
 				 58, 45 + 32 * i, 255, 255, 255, SMALL_FONT);
@@ -82,10 +77,25 @@ MoveSummaryScreen:
 				5 *
 				ppboostmult(Parties[eop].Member[PartyMember]->Moves[i].PPmult));
 		drawText(PPtext, 87, 59 + 32 * i, 255, 255, 255, SMALL_FONT);
+		DestRect.x = 18;
 		DestRect.y = 43 + 32 * i;
+		DestRect.w = 32;
+		DestRect.h = 14;
 		SourceRect.y =
 			14 * MoveList[Parties[eop].Member[PartyMember]->Moves[i].Move].Type;
+		SourceRect.w = 32;
+		SourceRect.h = 14;
 		SDL_RenderCopy(renderer, TypeLabels, &SourceRect, &DestRect);
+		DestRect.x = 56;
+		DestRect.y = 56 + 32 * i;
+		DestRect.w = 24;
+		DestRect.h = 12;
+		SourceRect.y =
+			28 *
+			MoveList[Parties[eop].Member[PartyMember]->Moves[i].Move].Category;
+		SourceRect.w = 56;
+		SourceRect.h = 28;
+		SDL_RenderCopy(renderer, CategoryIcons, &SourceRect, &DestRect);
 	}
 	DestRect.x = 168;
 	DestRect.y =
@@ -136,7 +146,7 @@ int PartyViewer(char InBattle, bool eop)
 	while (Viewing) {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT)
-                ExitProgram();
+				ExitProgram();
 			if (event.type == SDL_KEYDOWN) {
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 					ExitProgram();

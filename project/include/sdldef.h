@@ -46,6 +46,7 @@ extern SDL_Texture* MoveViewPage;
 extern SDL_Texture* Pokemon_Summary_Background;
 extern SDL_Texture* TypeLabels;
 extern SDL_Texture* Pokemon_Summary_General;
+extern SDL_Texture* CategoryIcons;
 
 typedef struct {
 float x;

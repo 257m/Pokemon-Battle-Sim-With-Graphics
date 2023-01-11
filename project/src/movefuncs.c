@@ -3,10 +3,12 @@
 #include "../include/display.h"
 #include "../include/drawing.h"
 #include "../include/effects.h"
+#include "../include/execution.h"
 #include "../include/general.h"
 #include "../include/moves.h"
 #include "../include/pokemon.h"
 #include "../include/switching.h"
+#include <stdint.h>
 
 void Boost(unsigned char stat, char boostrate, struct MyPokemon* pokemon)
 {
@@ -376,7 +378,59 @@ void EdgeCase(char et, bool eop, bool pos)
 					Boostandprint(i, -12, Parties[!eop].Member[0], !eop);
 }
 
-mf MOVE_FUNC_LIST[MF_MAX] = {
-	&Nothingf,		 &Strugglef, &StatMod,			&StatusInfliction,
-	&ProtectingMove, &RoarFunc,	 &Hp_Draining_Move, &EdgeCase,
-};
+void HealingMove(char et, bool eop, bool pos)
+{
+	unsigned char rs = pos * 5;
+	bool new_eop = (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] >=
+					HEAL_OTHER_STATIC);
+	int hp_save = Parties[new_eop].Member[0]->CurrentHp;
+	double damage_save = 0;
+	switch (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] -
+			new_eop * HEAL_OTHER_STATIC) {
+		case HEAL_SELF_STATIC:
+			damage_save = *(
+				(int16_t*)(MoveList[Parties[new_eop].Turn->Move].GNRL_PURPOSE +
+						   rs + 1));
+			break;
+		case HEAL_SELF_MAX:
+			damage_save =
+				Parties[new_eop].Member[0]->Hp *
+				((double)(*((int16_t*)(MoveList[Parties[new_eop].Turn->Move]
+										   .GNRL_PURPOSE +
+									   rs + 1))) /
+				 10000);
+			break;
+		case HEAL_SELF_CURRENT:
+			damage_save =
+				Parties[new_eop].Member[0]->CurrentHp *
+				((double)(*((int16_t*)(MoveList[Parties[new_eop].Turn->Move]
+										   .GNRL_PURPOSE +
+									   rs + 1))) /
+				 10000);
+			break;
+		case HEAL_SELF_LOST:
+			damage_save =
+				(Parties[new_eop].Member[0]->Hp -
+				 Parties[new_eop].Member[0]->CurrentHp) *
+				((double)(*((int16_t*)(MoveList[Parties[new_eop].Turn->Move]
+										   .GNRL_PURPOSE +
+									   rs + 1))) /
+				 10000);
+			break;
+		default:
+			break;
+	}
+	int damage_actual = damage_save;
+	if (hp_save + damage_actual > Parties[new_eop].Member[0]->Hp)
+		damage_actual = Parties[new_eop].Member[0]->Hp -
+						Parties[new_eop].Member[0]->CurrentHp;
+	else if (hp_save + damage_actual < 0)
+		damage_actual = Parties[new_eop].Member[0]->CurrentHp;
+	Parties[new_eop].Member[0]->CurrentHp += damage_actual;
+	HealthBar_Anim(eop, Parties[new_eop].Member[0]->CurrentHp, hp_save,
+				   damage_actual);
+}
+
+mf MOVE_FUNC_LIST[MF_MAX] = {&Nothingf,			&Strugglef,		 &StatMod,
+							 &StatusInfliction, &ProtectingMove, &RoarFunc,
+							 &Hp_Draining_Move, &EdgeCase,		 &HealingMove};

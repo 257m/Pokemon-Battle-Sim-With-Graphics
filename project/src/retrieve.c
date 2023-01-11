@@ -73,7 +73,7 @@ void RetrieveUserMove(bool eop)
 			bool UpAndDown = (SDL_GetTicks() / 250) % 2;
 			while (SDL_PollEvent(&event)) {
 				if (event.type == SDL_QUIT)
-                	ExitProgram();
+					ExitProgram();
 				if (event.type == SDL_KEYDOWN) {
 					if (event.key.keysym.sym == SDLK_ESCAPE)
 						ExitProgram();

@@ -119,7 +119,8 @@ void drawText(char* text, int x, int y, int r, int g, int b, int fontType)
 	}
 }
 
-void drawText_Shadow(char* text, int x, int y, int r, int g, int b, int fontType)
+void drawText_Shadow(char* text, int x, int y, int r, int g, int b,
+					 int fontType)
 {
 	int i, character;
 	SDL_Rect *glyph, dest;
@@ -129,7 +130,7 @@ void drawText_Shadow(char* text, int x, int y, int r, int g, int b, int fontType
 	i = 0;
 
 	character = text[i++];
-	
+
 	dest.x = x;
 	dest.y = y;
 	while (character) {

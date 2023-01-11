@@ -13,7 +13,7 @@
 #include "../include/sdldef.h"
 #include "../include/switching.h"
 
-void Damage_Anim(bool eop, double hp, double initial_hp, int initial_damage)
+void HealthBar_Anim(bool eop, double hp, double initial_hp, int initial_damage)
 {
 	// Draw
 	DestRect.x = 0;
@@ -180,30 +180,40 @@ void UDBOG(int* hp, int* damage)
 	if (*hp - *damage < 0)
 		*damage = *hp;
 	*hp -= *damage;
-	Damage_Anim((hp == &Parties[1].Member[0]->CurrentHp), (double)(*hp),
-				(double)initial_hp, initial_damage);
+	HealthBar_Anim((hp == &Parties[1].Member[0]->CurrentHp), (double)(*hp),
+				   (double)initial_hp, initial_damage);
 }
 
 void UDBOG2(int* hp, double damage, bool eop, unsigned status)
 {
+	int initial_hp = *hp;
 	if (*hp - damage < 0)
 		damage = *hp;
 	*hp -= damage;
-	if (status == STATUS_BURN) {
-		printf("%s took some damage from its burn!\n",
-			   POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+	switch (status) {
+		case STATUS_BURN:
+			sprintf(TempTextBuffer, "%s took some damage from its burn!\n",
+					POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+			TextBoxUpdateFast(TempTextBuffer, 50, 1000);
+			break;
+		case STATUS_POISON:
+			sprintf(TempTextBuffer, "%s is hurt by poison!\n",
+					POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+			TextBoxUpdateFast(TempTextBuffer, 50, 1000);
+			break;
+		case STATUS_TOXIC:
+			sprintf(TempTextBuffer,
+					"%s is hurt by poison! (it's badly poisoned)\n",
+					POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
+			TextBoxUpdateFast(TempTextBuffer, 50, 1000);
+			break;
+		case ESM + EFFECT_CONFUSION:
+			sprintf(TempTextBuffer, "It hurt itself in its confusion\n");
+			TextBoxUpdateFast(TempTextBuffer, 50, 1000);
+			break;
 	}
-	else if (status == STATUS_POISON) {
-		printf("%s is hurt by poison!\n",
-			   POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
-	}
-	else if (status == STATUS_TOXIC) {
-		printf("%s is hurt by poison! (it's badly poisoned)\n",
-			   POKEMONDEX[Parties[eop].Member[0]->Poke].Name);
-	}
-	else if (status == ESM + EFFECT_CONFUSION) {
-		printf("It hurt itself in its confusion\n");
-	}
+	HealthBar_Anim((hp == &Parties[1].Member[0]->CurrentHp), (double)(*hp),
+				   (double)initial_hp, damage);
 	printf("%s%s is at %d/%d\n", EOPTEXT[eop],
 		   POKEMONDEX[Parties[eop].Member[0]->Poke].Name,
 		   Parties[eop].Member[0]->CurrentHp, Parties[eop].Member[0]->Hp);
