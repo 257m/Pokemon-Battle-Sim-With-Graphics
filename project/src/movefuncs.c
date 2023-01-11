@@ -381,54 +381,57 @@ void EdgeCase(char et, bool eop, bool pos)
 void HealingMove(char et, bool eop, bool pos)
 {
 	unsigned char rs = pos * 5;
-	bool new_eop = (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] >=
-					HEAL_OTHER_STATIC);
+if (et == 1) {
+	bool new_eop;
+	if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] >=
+					HEAL_OTHER_STATIC)
+		;
 	int hp_save = Parties[new_eop].Member[0]->CurrentHp;
-	double damage_save = 0;
+	int damage_save = 0;
 	switch (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] -
 			new_eop * HEAL_OTHER_STATIC) {
 		case HEAL_SELF_STATIC:
 			damage_save = *(
-				(int16_t*)(MoveList[Parties[new_eop].Turn->Move].GNRL_PURPOSE +
+				(int16_t*)(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE +
 						   rs + 1));
 			break;
 		case HEAL_SELF_MAX:
 			damage_save =
-				Parties[new_eop].Member[0]->Hp *
-				((double)(*((int16_t*)(MoveList[Parties[new_eop].Turn->Move]
+				(int)(Parties[new_eop].Member[0]->Hp *
+				((double)(*((int16_t*)(MoveList[Parties[eop].Turn->Move]
 										   .GNRL_PURPOSE +
 									   rs + 1))) /
-				 10000);
+				 10000));
 			break;
 		case HEAL_SELF_CURRENT:
 			damage_save =
-				Parties[new_eop].Member[0]->CurrentHp *
-				((double)(*((int16_t*)(MoveList[Parties[new_eop].Turn->Move]
+				(int)(Parties[new_eop].Member[0]->CurrentHp *
+				((double)(*((int16_t*)(MoveList[Parties[eop].Turn->Move]
 										   .GNRL_PURPOSE +
 									   rs + 1))) /
-				 10000);
+				 10000));
 			break;
 		case HEAL_SELF_LOST:
 			damage_save =
-				(Parties[new_eop].Member[0]->Hp -
+				(int)((Parties[new_eop].Member[0]->Hp -
 				 Parties[new_eop].Member[0]->CurrentHp) *
-				((double)(*((int16_t*)(MoveList[Parties[new_eop].Turn->Move]
-										   .GNRL_PURPOSE +
-									   rs + 1))) /
+				((double)((int16_t)MoveList[Parties[eop].Turn->Move]
+										   .GNRL_PURPOSE[rs + 1] << 8 | MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs + 2])) /
 				 10000);
 			break;
 		default:
 			break;
 	}
 	int damage_actual = damage_save;
+	printf("actual damage: %d\n",damage_actual);
 	if (hp_save + damage_actual > Parties[new_eop].Member[0]->Hp)
-		damage_actual = Parties[new_eop].Member[0]->Hp -
-						Parties[new_eop].Member[0]->CurrentHp;
+		damage_actual = Parties[new_eop].Member[0]->Hp - hp_save;
 	else if (hp_save + damage_actual < 0)
-		damage_actual = Parties[new_eop].Member[0]->CurrentHp;
+		damage_actual = -hp_save;
 	Parties[new_eop].Member[0]->CurrentHp += damage_actual;
 	HealthBar_Anim(eop, Parties[new_eop].Member[0]->CurrentHp, hp_save,
-				   damage_actual);
+				   damage_save);
+	}
 }
 
 mf MOVE_FUNC_LIST[MF_MAX] = {&Nothingf,			&Strugglef,		 &StatMod,
