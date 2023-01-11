@@ -34,6 +34,7 @@ SDL_Texture* MoveViewPage;
 SDL_Texture* Pokemon_Summary_Background;
 SDL_Texture* TypeLabels;
 SDL_Texture* Pokemon_Summary_General;
+SDL_Texture* CategoryIcons;
 
 SDL_Texture* initialize_texture_from_file(const char* file_name,
 										  SDL_Renderer* rend)

@@ -51,6 +51,8 @@ const struct PokemonDex POKEMONDEX[] = {
 	{"Daroasinogt", 60, 150, 60, 150, 60, 120, DARK, GHOST},
 	{"Rhinorium", 70, 115, 120, 60, 70, 68, ROCK, MAGIC},
 	{"Spiramp", 200, 40, 140, 40, 140, 10, PLANT, BUG},
+	{"Trevla", 53, 54, 32, 80, 54, 44, BUG, POISON},
+	{"Trevanla", 77, 78, 52, 100, 78, 81, BUG, POISON},
 	{"Trevantula", 100, 101, 71, 120, 101, 91, BUG, POISON},
 	{"Salava", 29, 62, 43, 70, 50, 95, FIRE, NOTYPE},
 	{"Solighn", 15, 15, 15, 70, 60, 60, FIRE, LIGHT},
@@ -60,4 +62,5 @@ const struct PokemonDex POKEMONDEX[] = {
 	{"Tiberatieal", 75, 100, 80, 100, 80, 90, MAGIC, MARTIAL},
 	{"Hieloun", 60, 75, 50, 45, 60, 75, FIRE, DARK},
 	{"Hieloundour", 75, 100, 60, 65, 75, 100, FIRE, DARK},
+
 };
