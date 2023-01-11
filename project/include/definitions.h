@@ -36,9 +36,9 @@ extern float TypeChart [TYPE_MAX][18];
 //  This is the type chart I am soon going to make it so that it stores values from 0-3 instead but that is a task for another day
 
 struct Move {
- char Name[16] ; // Stores the names of the pokemon
+ char Name [16]; // Stores the names of the pokemon
  unsigned char BP; // The Basepower of the move its a value from 0-255. Note that some move may have a BP over 255 in some cases but that will be handled by a PP multiplier
- unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considered by the game to be a move that never misses.
+ unsigned int Accuracy : 7; // The Accruacy of the move it is a vlaue fro 0-127 and if it is above 100 it is considesed by the game to be a move that never misses.
  unsigned int PP : 3; // it is a 4 bit unsigned int and simply multiplyed by 5 when trying to retrieve the actual value
  unsigned int Type : 5; // Pretty obvious it stores the Type of the pokemon and it will segfault if above 21 because there are only 22 types if you add the NULL type
  unsigned int Category : 2; // [0] Status [1] Physical [2] Special [4] haven't decided yet I could probably shave off a bit if I merged this with Priority. Actually nevermind 3x12 is 3 which is above 32 so at the very least 6 bits
@@ -49,7 +49,7 @@ struct Move {
 }__attribute__((__packed__));
 
 /*
-The structure for move storage it subject to change
+The structure for move storage is subject to change
 */
 
 struct Nature {
