@@ -382,14 +382,16 @@ void HealingMove(char et, bool eop, bool pos)
 {
 	unsigned char rs = pos * 5;
 if (et == 1) {
-	bool new_eop;
-	if (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] >=
-					HEAL_OTHER_STATIC)
-		;
+	bool new_eop = MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] >=
+					HEAL_OTHER_STATIC;
+	if (new_eop)
+		new_eop = !eop;
+	else
+		new_eop = eop;
 	int hp_save = Parties[new_eop].Member[0]->CurrentHp;
 	int damage_save = 0;
 	switch (MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE[rs] -
-			new_eop * HEAL_OTHER_STATIC) {
+			(new_eop != eop) * HEAL_OTHER_STATIC) {
 		case HEAL_SELF_STATIC:
 			damage_save = *(
 				(int16_t*)(MoveList[Parties[eop].Turn->Move].GNRL_PURPOSE +
@@ -423,14 +425,13 @@ if (et == 1) {
 			break;
 	}
 	int damage_actual = damage_save;
-	printf("actual damage: %d\n",damage_actual);
 	if (hp_save + damage_actual > Parties[new_eop].Member[0]->Hp)
 		damage_actual = Parties[new_eop].Member[0]->Hp - hp_save;
 	else if (hp_save + damage_actual < 0)
 		damage_actual = -hp_save;
 	Parties[new_eop].Member[0]->CurrentHp += damage_actual;
 	HealthBar_Anim(eop, Parties[new_eop].Member[0]->CurrentHp, hp_save,
-				   damage_save);
+				   -damage_save);
 	}
 }
 
