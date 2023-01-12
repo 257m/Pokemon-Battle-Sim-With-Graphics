@@ -117,7 +117,7 @@ void HealthBar_Anim(bool eop, double hp, double initial_hp, int initial_damage)
 					   Parties[eop].Member[0]->Hp) *
 					  48);
 
-	double vx = (double)(initial_damage + 50) / 5;
+	double vx = ((double)(initial_damage) / 5) + 5;
 	SourceRect.x = 201 - (eop * 152);
 	SourceRect.y = 120 - (eop * 76);
 	DestRect.x = 201 - (eop * 152);
@@ -135,7 +135,7 @@ void HealthBar_Anim(bool eop, double hp, double initial_hp, int initial_damage)
 		// Lower hp
 		initial_hp -= vx * ((double)timesincelastdraw / 1000);
 		// Check to see if anim is done
-		if (initial_hp <= hp) {
+		if ((initial_hp <= hp && vx > 0) || (initial_hp >= hp && vx < 0)) {
 			// Reset initial to hp just in case it is below
 			initial_hp = hp;
 			// End loop
