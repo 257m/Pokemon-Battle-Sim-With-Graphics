@@ -285,13 +285,22 @@ void RetrieveUserMove(bool eop)
 										.PPmult));
 				drawText(TempTextBuffer, 192, 154, 0, 0, 0, REGULAR_FONT);
 
-				sprintf(
+				/*sprintf(
 					TempTextBuffer, "Type: %s",
 					TypeNames
 						[MoveList
 							 [Parties[eop].Member[0]->Moves[OptionSelect].Move]
 								 .Type]);
-				drawText(TempTextBuffer, 192, 172, 0, 0, 0, SMALL_FONT);
+				drawText(TempTextBuffer, 192, 172, 0, 0, 0, SMALL_FONT);*/
+				DestRect.x = 192;
+				DestRect.y = 172;
+				DestRect.w = 32;
+				DestRect.h = 14;
+				SourceRect.x = 0;
+				SourceRect.y = 14 * MoveList[Parties[eop].Member[0]->Moves[OptionSelect].Move].Type;
+				SourceRect.w = 32;
+				SourceRect.h = 14;
+				SDL_RenderCopy(renderer, TypeLabels, &SourceRect, &DestRect);
 
 				DestRect.x = 8 + ((OptionSelect % 2) * 89);
 				DestRect.y = 155 + ((OptionSelect > 1) * 18);

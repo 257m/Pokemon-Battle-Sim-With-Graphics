@@ -249,7 +249,7 @@ const struct Move MoveList[MOVE_MAX] = {
 	 STATUS,
 	 0,
 	 MF_STATMOD << 5,
-	 {0, 0, STAT1_0_STAT2_n1, 0, OTHER | 100},
+	 {STAT1_0_STAT2_n1, 0, 0, 0, OTHER | 100},
 	 FLAG_PROTECT_AFFECTED | FLAG_TYPE_IMMUNITY_AFFECTED},
 	// [22] Kinesis
 	{"Kinesis",

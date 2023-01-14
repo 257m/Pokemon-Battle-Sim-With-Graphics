@@ -61,7 +61,7 @@ void Boostandprint(unsigned char stat, char boostrate,
 void ResetBoosts(struct MyPokemon* pokemon)
 {
 	for (int i = 0; i < 8; i++)
-		pokemon->StatBoosts[0] = 0;
+		pokemon->StatBoosts[i] = 0;
 }
 
 char StatusImmunity(unsigned char status, bool eop)

@@ -50,7 +50,7 @@ const struct PokemonDex POKEMONDEX[] = {
 	{"Faeternaert", 120, 50, 50, 130, 150, 100, LIGHT, MAGIC},
 	{"Daroasinogt", 60, 150, 60, 150, 60, 120, DARK, GHOST},
 	{"Rhinorium", 70, 115, 120, 60, 70, 68, ROCK, MAGIC},
-	{"Spiramp", 200, 40, 140, 40, 140, 10, PLANT, BUG},
+	{"Spiramp", 200, 40, 140, 40, 140, 10, GHOST, PLANT},
 	{"Trevla", 53, 54, 32, 80, 54, 44, BUG, POISON},
 	{"Trevanla", 77, 78, 52, 100, 78, 81, BUG, POISON},
 	{"Trevantula", 100, 101, 71, 120, 101, 91, BUG, POISON},
@@ -62,5 +62,8 @@ const struct PokemonDex POKEMONDEX[] = {
 	{"Tiberatieal", 75, 100, 80, 100, 80, 90, MAGIC, MARTIAL},
 	{"Hieloun", 60, 75, 50, 45, 60, 75, FIRE, DARK},
 	{"Hieloundour", 75, 100, 60, 65, 75, 100, FIRE, DARK},
+  {"Darny",	33,	22,	31,	44,	35,	54, BUG, AIR},
+  {"Dargony",	44,	33,	44,	56,	48,	75, BUG, AIR},
+  {"Dargonaly",	5, 1,44,55, 71,	61,	97, BUG,AIR},
 
 };
